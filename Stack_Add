@@ -127,6 +127,7 @@ class SLList
 
      public :
 
+// No need of constructor
     // Stack()
     //  {
     //    L1 = new SLList<Type1>() ;
