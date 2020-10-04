@@ -1,0 +1,566 @@
+#include <iostream>
+
+ using namespace std ; 
+
+template <class Type>
+
+class SLLNode
+{
+  
+ public :
+
+    Type info ;
+    SLLNode *next ;
+
+   SLLNode()
+    {
+    	info = 0 ;
+
+    	next = NULL ;
+    }
+
+
+   SLLNode(Type element)
+    {
+    	info = element ;
+
+    	next = 0 ;
+    } 
+
+} ;
+
+template <class Type1>
+
+class SLList
+ {
+    SLLNode <Type1> *head ;
+    SLLNode <Type1> *tail ;
+
+    public :
+
+     SLList()
+      {
+      	head = NULL ;
+      	tail = NULL ;
+      }
+
+
+     void add_at_head(Type1 element)
+       {
+
+       	 SLLNode <Type1> *N = new SLLNode <Type1>(element) ;
+
+          if (head == NULL)
+          {
+          	  head = N ;
+          	  tail = N ;
+          }
+
+          else 
+
+          {
+             N->next = head ;
+
+             head = N ;
+          }
+
+
+       }
+
+     void add_at_tail(Type1 element)
+       {
+          SLLNode <Type1>*N = new SLLNode <Type1>(element) ;
+
+           if (head == NULL)
+           {
+           	  head = N ;
+           	  tail = N ;
+           }
+
+           else
+           {
+              tail->next = N ;
+
+              tail = N ;
+
+           }
+
+       }  
+
+     void traverse()
+       {
+          SLLNode <Type1> *temp = head ;
+
+           if(head == NULL)
+
+           	 cout<<"\n\n List is empty !!! " ;
+
+           else
+           
+             {
+                while(temp != NULL)
+                 {
+                 	cout<<temp->info<<endl ;
+
+                 	 temp = temp->next ;
+                 }
+
+             }	
+
+       }
+
+      bool search(Type1 element)
+       {
+       	  SLLNode <Type1> *temp = head ;
+
+       	    while(temp != NULL)
+       	      {
+       	      	 if (temp->info == element)
+
+       	      	 	 return true ;
+
+       	      	 temp = temp->next ;	
+       	      }
+
+       	  return false ;    
+       }
+
+       SLLNode<Type1>* search_ptr(Type1 element)
+         {
+         	SLLNode <Type1> *temp = head ;
+
+         	  while(temp != NULL)
+         	   {
+         	    
+         	       if (temp->info == element)
+
+         	        	 return temp ;
+
+         	        temp = temp->next ;	
+         	         	     
+         	    }
+                
+         
+             return temp ;   
+         }
+
+        void delete_from_head()
+         {
+         	if (head == NULL)
+         		
+         		return ;
+
+         	else
+
+            if (head == tail)
+
+            	{ 
+                    delete head ;
+
+                    head = NULL ;
+
+                    tail = NULL ;
+                 
+            	}
+
+            else
+
+            	{ 
+                   SLLNode <Type1> *temp = head ;
+
+                   head = head->next ;
+
+                   delete temp ;
+                  
+            	}
+
+         }
+
+         void delete_from_tail()
+          {
+            if (head == NULL)
+              
+              return ;
+
+            else
+
+             if (head == tail)
+
+              { 
+                     delete head ;
+
+                     head = NULL ;
+
+                     tail = NULL ;
+                  
+              }
+
+             else
+
+              { 
+                    SLLNode <Type1> *temp = head ;
+
+                     while(temp->next != tail)
+                              
+                          temp = temp->next ;
+                    
+                    delete tail ;
+
+                    tail = temp ;
+
+                    tail->next = NULL ;
+
+              }
+
+          }
+
+
+
+        int count()
+         {
+         	 SLLNode <Type1> *temp = head ;
+
+         	    int c = 0 ;
+
+         	  while(temp != NULL)
+         	  {
+         	  	 c++ ;
+
+         	  	 temp = temp->next ;
+         	  }
+
+         	return c ;  
+         }
+
+
+         float average()
+          {
+          	 SLLNode <Type1> *temp = head ;
+
+          	   int n = 0  ;
+
+          	   float sum = 0 ;
+
+          	  while(temp != NULL)
+          	    {
+          	    	n++ ;
+
+          	    	sum += temp->info ;
+
+          	    	temp = temp->next ;
+          	    } 
+
+
+             if (n == 0)
+             
+                return 0 ;
+
+             else
+
+          	  return sum/n ;  
+          } 
+
+
+        void reverse()
+         {
+            SLLNode <Type1> *curr = head,*last = NULL,*later = NULL ;
+
+            tail = head ;
+
+              while(curr != NULL)
+               {
+                  later = curr->next ;
+
+                  curr->next = last ;
+
+                  last = curr ;
+
+                  curr = later ;
+               } 
+
+            head = last ;
+         }
+
+        void odd_val()
+         {
+            SLLNode <Type1> *temp = head ;
+
+              while(temp != NULL)
+              {
+                 if (temp->info % 2 != 0)
+
+                    cout << temp->info << endl ;
+
+
+                 temp = temp->next ;
+              }
+
+         }
+
+        void odd_pos()
+         {
+            SLLNode <Type1> *temp = head ;
+
+            int c = 1 ;
+
+             while(temp != NULL)
+             {
+                if (c % 2 != 0)
+
+                   cout << temp->info << endl ;
+
+                temp = temp->next ;
+
+                 c++ ;
+ 
+             }
+
+         }
+
+     
+ } ;
+
+
+template <typename T>
+
+ void menu(SLList <T> &L)
+ { 
+ 	 int n ;
+   T element ;
+
+ 	 bool check ;
+
+ 	 float avg ;
+
+ 	 char ch ;
+
+ 	 
+
+ 	   do{                                     // do - while loop for MENU 
+
+ 	     cout<<"\n\n\t\t\t MAIN MENU \n\n"
+ 	         <<"\n Press \"1\" for Insert at head ."
+ 	         <<"\n Press \"2\" for Insert at tail ."
+ 	         <<"\n Press \"3\" for Traversing the List ."
+ 	         <<"\n Press \"4\" for search element from the List if it is present or not ."
+ 	         <<"\n Press \"5\" for search element from the List and print its address ."
+ 	         <<"\n Press \"6\" for Delete the element from head of the List ."
+           <<"\n Press \"7\" for Delete the element from tail of the List ."
+ 	         <<"\n Press \"8\" for Counting the no. of nodes from the List ."
+ 	         <<"\n Press \"9\" for Calculate the average of the elements of the List ."
+           <<"\n Press \"10\" for Reversing the list ."
+           <<"\n Press \"11\" for Displaying the odd valued elements ."
+           <<"\n Press \"12\" for Displaying the odd positioned elements ."
+ 	         <<"\n Press \"13\" for EXIT ." ;
+ 	     
+ 	    cout<<"\n\n\t\t Enter Your Choice : ";
+
+ 	      cin>>n ;
+
+ 	      while(!(n >= 1 && n <= 13))       // this loop checks for input to be between 1 and 13
+ 	         {
+ 	      
+ 	            cout<<"\n\t\t INVALID INPUT !!!"<<"\n\n Please Enter a Valid Input : ";
+
+ 	                    cin>>n ;
+
+ 	         }    
+
+ 	    
+ 	       switch(n)
+ 	         {
+
+ 	              case 1 : {
+ 	                           
+ 	                         cout<<"\n\n Enter the element : " ;
+
+ 	                         cin>>element ;
+
+ 	                            L.add_at_head(element) ;
+
+ 	                            break ;
+ 	   
+ 	                       }
+ 	            
+ 	              case 2 : {
+ 	                         cout<<"\n\n Enter the element : " ;
+
+ 	                         cin>>element ;
+
+ 	                            L.add_at_tail(element) ;
+
+ 	                            break ;
+ 	                           
+ 	                       }
+
+ 	              case 3 : {
+
+ 	                           cout<<"\n\n Elements in the List : \n" ;
+
+ 	                                L.traverse() ;
+
+ 	                              break ;
+
+ 	                       }
+
+ 	             
+
+ 	              case 4 : {
+                              cout<<"\n\n Enter the element : " ;
+
+                              cin>>element ;
+
+                               check = L.search(element) ;
+
+                                if (check == 1)
+                                
+                                   cout<<"\n\n "<<element<<" is present in the list"  ;
+                                
+                                else
+
+                                   cout<<"\n\n "<<element<<" is NOT present in the list"  ;
+                              
+                                 break ;
+ 	                       }                                   
+ 	            
+ 	              case 5 : {
+                              cout<<"\n\n Enter the element : " ;
+
+                              cin>>element ;
+
+                               check = L.search(element) ;
+
+                                if (check == 1)
+                                
+                                   cout<<"\n\n "<<element<<" is at : "<<L.search_ptr(element)  ;
+                                
+                                else
+
+                                   cout<<"\n\n "<<element<<" is NOT present in the list"  ;
+                              
+                                 break ;
+ 	                       }                                      
+ 	              
+ 	              case 6 : {
+                              L.delete_from_head() ;
+
+                                cout<<"\n\n Element is deleted from the head ." ;
+
+                               break ;
+ 	                       }
+              
+                case 7 : {
+                              L.delete_from_tail() ;
+
+                                cout<<"\n\n Element is deleted from the tail ." ;
+
+                               break ;
+                         }
+
+
+
+ 	              case 8 : {
+                              cout<<"\n\n Number of nodes in the List : "<<L.count() ;
+
+                               break ;
+ 	                       }
+
+ 	              case 9 : {
+ 	              	          avg = L.average() ;
+
+                              cout <<"\n\n Average is : "<<avg ;
+
+                               break ;
+ 	                       }          
+
+ 	              case 10 : {
+                             L.reverse() ;
+
+                              cout<<"\n\n List is reversed " ;
+
+                               break ;
+                         }    
+
+                case 11 : {
+                                                  
+                             cout<<"\n\n Odd valued elements are \n" ;
+
+                               L.odd_val() ;
+
+                               break ;
+                         }
+
+                case 12 : {
+                              cout<<"\n\n Odd positioned elements are \n" ;
+
+                               L.odd_pos() ;
+
+                               break ;
+                         }    
+    
+
+                case 13 :    return  ;                                   
+
+ 	         }
+
+
+ 	                   cout<<"\n\n\t Wish to continue ? ( Y/N ) ";
+
+ 	                            cin>>ch ;
+
+
+ 	                      while(!(ch == 'y' || ch == 'Y' || ch == 'n' || ch == 'N'))       // this loop checks for input to be "Y" or "N" 
+ 	                         {
+ 	         
+ 	                            cout<<"\n\t\t INVALID INPUT !!!"<<"\n\n Please Enter a Valid Input : ";
+
+ 	                                    cin>>ch ;
+
+ 	                         }    
+
+ 	     }while(ch == 'y' || ch == 'Y');      // continue the same loop as user wish 
+
+ 
+ }
+
+
+int main()
+{
+  int choice ;
+
+     cout<<"\n\n Enter the type of List : " ;
+     cout<<"\n Press \"1\" for integer \"2\" for character : " ;
+
+     cin>>choice ;
+     
+
+       while(!(choice >= 1 && choice <= 2))       // this loop checks for input to be between 1 and 2
+          {
+       
+             cout<<"\n\t\t INVALID INPUT !!!"<<"\n\n Please Enter a Valid Input : ";
+
+                     cin>>choice ;
+
+          } 
+
+      
+
+      if (choice == 1 )
+        {
+          SLList <int> L ;
+
+          menu(L) ;
+        }  
+
+      else
+      
+      if (choice == 2)
+        {
+          SLList <char> L ;
+
+          menu(L) ;
+        } 
+
+
+  return 0 ;
+}
