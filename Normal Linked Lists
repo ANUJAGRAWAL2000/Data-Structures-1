@@ -281,7 +281,7 @@ class SLList
             head = last ;
          }
 
-        void odd_val()
+        void odd_val()  // function to print odd valued elements
          {
             SLLNode <Type1> *temp = head ;
 
@@ -297,7 +297,7 @@ class SLList
 
          }
 
-        void odd_pos()
+        void odd_pos()  // function to print odd positioned elements
          {
             SLLNode <Type1> *temp = head ;
 
