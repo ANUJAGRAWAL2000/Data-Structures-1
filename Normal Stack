@@ -1,3 +1,5 @@
+// Program to implement stack using linked lists
+
 #include <iostream>
 
  using namespace std ; 
