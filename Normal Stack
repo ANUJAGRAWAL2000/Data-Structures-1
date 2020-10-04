@@ -1,0 +1,319 @@
+#include <iostream>
+
+ using namespace std ; 
+
+template <class Type>
+
+class SLLNode
+{
+  
+ public :
+
+    Type info ;
+    SLLNode *next ;
+
+   SLLNode()
+    {
+    	info = 0 ;
+
+    	next = NULL ;
+    }
+
+
+   SLLNode(Type element)
+    {
+    	info = element ;
+
+    	next = 0 ;
+    } 
+
+} ;
+
+template <class Type1>
+
+class SLList
+ {
+    SLLNode <Type1> *head ;
+    SLLNode <Type1> *tail ;
+
+    public :
+
+     SLList()
+      {
+      	head = NULL ;
+      	tail = NULL ;
+      }
+
+
+     void add_at_head(Type1 element)
+       {
+
+       	 SLLNode <Type1> *N = new SLLNode <Type1>(element) ;
+
+          if (head == NULL)
+          {
+          	  head = N ;
+          	  tail = N ;
+          }
+
+          else 
+
+          {
+             N->next = head ;
+
+             head = N ;
+          }
+
+
+       }
+       
+        void delete_from_head()
+         {
+         	if (head == NULL)
+         		
+         		return ;
+
+         	else
+
+            if (head == tail)
+
+            	{ 
+                    delete head ;
+
+                    head = NULL ;
+
+                    tail = NULL ;
+                 
+            	}
+
+            else
+
+            	{ 
+                   SLLNode <Type1> *temp = head ;
+
+                   head = head->next ;
+
+                   delete temp ;
+                  
+            	}
+
+         }
+
+       Type1 head_el()
+        {
+           return head->info ;
+        }
+
+       bool is_head_null()
+        { 
+           if (head == NULL)
+
+              return true ;
+
+           else
+
+              return false ;
+        }
+     
+ } ;
+
+ template <typename Type2>
+
+ class Stack
+ {
+   SLList <Type2>L1 ;
+
+     public :
+
+    // Stack()
+    //  {
+    //    L1 = new SLList<Type1>() ;
+    //  }
+
+    void push(Type2 element)
+     {
+        L1.add_at_head(element) ;
+     }
+
+    void pop()
+     {
+        L1.delete_from_head() ;
+     }
+
+    Type2 top_el()
+     {
+        return L1.head_el() ;
+     }
+
+    bool isempty()
+     {
+        return L1.is_head_null() ;
+     }
+
+ } ;
+
+
+template <typename T>
+
+ void menu(Stack <T> &S)
+ { 
+ 	 int n ;
+   T element ;
+
+ 	 bool check ;
+
+ 	 float avg ;
+
+ 	 char ch ;
+
+ 	 
+
+ 	   do{                                     // do - while loop for MENU 
+
+ 	     cout<<"\n\n\t\t\t MAIN MENU \n\n"
+ 	         <<"\n Press \"1\" for Push ."
+ 	         <<"\n Press \"2\" for Pop ."
+ 	         <<"\n Press \"3\" for Top element in the Stack ."
+ 	         <<"\n Press \"4\" for checking if the Stack is empty or not ."
+ 	         <<"\n Press \"5\" for EXIT ." ;
+ 	     
+ 	    cout<<"\n\n\t\t Enter Your Choice : ";
+
+ 	      cin>>n ;
+
+ 	      while(!(n >= 1 && n <= 5))       // this loop checks for input to be between 1 and 5
+ 	         {
+ 	      
+ 	            cout<<"\n\t\t INVALID INPUT !!!"<<"\n\n Please Enter a Valid Input : ";
+
+ 	                    cin>>n ;
+
+ 	         }    
+
+ 	    
+ 	       switch(n)
+ 	         {
+
+ 	              case 1 : {
+ 	                           
+ 	                         cout<<"\n\n Enter the element : " ;
+
+ 	                         cin>>element ;
+
+ 	                            S.push(element) ;
+
+ 	                            break ;
+ 	   
+ 	                       }
+ 	            
+ 	              case 2 : {
+ 	                          if (S.isempty())
+
+                              cout << "\n\n Stack is empty !!! " ;
+
+                            else
+                             {
+                               cout << "\n\n " << S.top_el() << " is Popped !!! " ;
+                               
+                                S.pop() ;
+                             }
+
+ 	                            break ;
+ 	                           
+ 	                       }
+
+ 	              case 3 : {
+                            if (S.isempty())
+
+                              cout << "\n\n Stack is empty !!! " ;
+
+                            else
+                             
+                               cout<<"\n\n Top Element in the Stack : " << S.top_el() ;
+                             
+ 	                              break ;
+
+ 	                       }
+
+ 	             
+
+ 	              case 4 : {
+                             if (S.isempty())
+
+                              cout << "\n\n Stack is empty !!! " ;
+
+                             else
+
+                              cout << "\n\n Stack is not empty !!! " ;
+
+                              break ;                           
+                             
+                         }                                   
+ 	            
+ 	              
+
+                case 5 :    return  ;                                   
+
+ 	         }
+
+
+ 	                   cout<<"\n\n\t Wish to continue ? ( Y/N ) ";
+
+ 	                            cin>>ch ;
+
+
+ 	                      while(!(ch == 'y' || ch == 'Y' || ch == 'n' || ch == 'N'))       // this loop checks for input to be "Y" or "N" 
+ 	                         {
+ 	         
+ 	                            cout<<"\n\t\t INVALID INPUT !!!"<<"\n\n Please Enter a Valid Input : ";
+
+ 	                                    cin>>ch ;
+
+ 	                         }    
+
+ 	     }while(ch == 'y' || ch == 'Y');      // continue the same loop as user wish 
+
+ 
+ }
+
+
+int main()
+{
+  int choice ;
+
+     cout<<"\n\n Enter the type of List : " ;
+     cout<<"\n Press \"1\" for integer \"2\" for character : " ;
+
+     cin>>choice ;
+     
+
+       while(!(choice >= 1 && choice <= 2))       // this loop checks for input to be between 1 and 2
+          {
+       
+             cout<<"\n\t\t INVALID INPUT !!!"<<"\n\n Please Enter a Valid Input : ";
+
+                     cin>>choice ;
+
+          } 
+
+      
+
+      if (choice == 1 )
+        {
+          Stack <int> S ;
+
+          menu(S) ;
+        }  
+
+      else
+      
+      if (choice == 2)
+        {
+          Stack <char> S ;
+
+          menu(S) ;
+        } 
+
+
+  return 0 ;
+}
